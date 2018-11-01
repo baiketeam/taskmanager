@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Repositories\ProjectsRepository; 
+use App\Http\Requests\ProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -16,10 +17,18 @@ class ProjectsController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         // dd($request->all());
         $this->repo->create($request);
         return back();
+    }
+
+    public function index()
+    {
+        $projects = request()->user()->projects()->get();
+        // dd($projects);
+        // $projects = $this->repo->list();
+        return view('welcome', compact('projects'));
     }
 }
