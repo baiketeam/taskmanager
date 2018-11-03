@@ -11,12 +11,12 @@ class Project extends Model
         'name','thumbnail'
     ];
 
-    public function user()
-    {
+    public function user(){
+        // $project->user
         return $this->belongsTo(User::class);
     }
 
-    // public function tasks(){
-    //     return $this->hasMany('App\Task');
-    // }
+    public function tasks(){
+        return $this->hasMany('App\Task');
+    }
 }
